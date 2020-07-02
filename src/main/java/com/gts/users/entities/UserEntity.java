@@ -58,6 +58,12 @@ public class UserEntity implements Serializable {
     
     
     
+	public UserEntity() { 	}
+
+	public UserEntity(String email, String firstName, String lastName) {
+	 System.out.println("--------------");
+	}
+
 	public Collection<RoleEntity> getRoles() {
 		return roles;
 	}

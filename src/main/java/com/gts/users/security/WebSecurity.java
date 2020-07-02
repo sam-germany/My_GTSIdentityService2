@@ -1,19 +1,25 @@
 package com.gts.users.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.gts.users.repositories.UserRepository;
 import com.gts.users.services.UserService;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-@EnableWebSecurity
+@Configuration
+@EnableOAuth2Client
 public class WebSecurity extends WebSecurityConfigurerAdapter{
 	
 	
@@ -21,6 +27,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	   private final UserRepository userRepo;	
    
+	   
+	    @Autowired
+		@Qualifier("oauth2authSuccessHandler")
+		private AuthenticationSuccessHandler oauth2authSuccessHandler;
 	   
 	   public WebSecurity(UserService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder , UserRepository userRepo) {
 		   this.userDetailsService = userDetailsService;
@@ -34,6 +44,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	    protected void configure(HttpSecurity http) throws Exception {
 		
 	             http.csrf().disable().authorizeRequests()
+	                 .antMatchers("/login").permitAll()
 	                 .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
 	                 .antMatchers(HttpMethod.POST, SecurityConstants.CREATE_USER).permitAll()
 	                 .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
@@ -43,9 +54,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	                 .addFilter(getAuthenticationFilter())
 	                 .addFilter(new AuthorizationFilter(authenticationManager(), userRepo))
 	                 .sessionManagement()
-	                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);// if required then we can change the
+	                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)// if required then we can change the
 	                                                                     // policy from STATELESS to any other also
-	                 
+	                 .and().oauth2Login().loginPage("/login").successHandler(oauth2authSuccessHandler);
 	              }
 	   
 	   

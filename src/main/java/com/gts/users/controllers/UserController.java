@@ -24,9 +24,7 @@ import com.gts.users.repositories.ResponseMessageConstants;
 import com.gts.users.services.UserService;
 import com.gts.users.shared.dto.UserDto;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @RequestMapping("users")
@@ -37,7 +35,7 @@ public class UserController {
 	  private UserService uService;
 	  
 	  
-	   @ApiOperation(value="Create User Web Service Endpoint",    notes="${userController.createUser.notes}")
+	  
 	   @PostMapping( produces = { MediaType.APPLICATION_JSON_VALUE })
        public JsonResponseModel  createUser(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
 		  
@@ -64,10 +62,7 @@ public class UserController {
 
 
 
-	@ApiOperation(value="Get User Web Service Endpoint",      notes="with this method we can get Single user info from its User Id")
-	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
-	   })
+	
 	   @GetMapping(path = "{id}" ,produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public <T> T getUser(@PathVariable long id) {
 		   
@@ -91,10 +86,7 @@ public class UserController {
 		   return (T) returnValue;
 	   }
 	   
-	   @ApiOperation(value="Update User Web Service Endpoint",    notes="with this method we can update  User")
-	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
-	   })
+	   
 	   @PutMapping(path = "/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public JsonResponseModel updateUser(@PathVariable long id , @RequestBody  UserDetailsRequestModel userDetails ) {
 		   
@@ -120,10 +112,6 @@ public class UserController {
 		   
 	   }
 	   @PreAuthorize("hasAuthority('CAN_DELETE_ACCOUNT') or # id == principal.userId")
-	   @ApiOperation(value="Delete User Web Service Endpoint",    notes="with this method we can delete a user")
-	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
-	   })
 	   @DeleteMapping(path = "/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public JsonResponseModel deleteUser(@PathVariable  long id) {
 		   
@@ -146,10 +134,6 @@ public class UserController {
 	   }
 	   
 	   @PreAuthorize("hasAuthority('CAN_GET_LIST_OF_USERS')")
-	   @ApiOperation(value="Get all User Web Service Endpoint",    notes="with this method we can get List of all the Users")
-	   @ApiImplicitParams({                               // ${from properties file defined value}
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
-	   })
 	   @GetMapping( produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public <T> T getAllUsers(@RequestParam(value = "page" , defaultValue = "0") int page,
 			                             @RequestParam(value = "limit" , defaultValue = "25") int limit) {
