@@ -5,26 +5,39 @@ server:
 
 
 spring:
- datasource:
-  url: jdbc:mysql://localhost/GTS_MYSQL?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-  username: root
-  password: 1234
+  datasource:
+    url: jdbc:mysql://localhost/GTS_MYSQL?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 1234
  
-
- 
-
- security:
+  security:
     oauth2:
       client:
         registration:
-         google:
-          client-id: 489630767816-8iii3jveubnmqmevetail6u72suic0io.apps.googleusercontent.com
-          client-secret: sA4TIrc1Llwum7YsbYR2yrJ2
-          
+          google:
+            client-id: 489630767816-8iii3jveubnmqmevetail6u72suic0io.apps.googleusercontent.com
+            client-secret: sA4TIrc1Llwum7YsbYR2yrJ2
+            
+            
+            
+            
+          facebook: 
+            clientId: 303075410832221
+            clientSecret: 65b803ffe88da1bfc17a37d3c6274349
+            scope:
+               - email
+               - public_profile 
+            
+    
+  
+  
+  
+  
+  
            
- jpa:
-  hibernate:
-   ddl-auto: update           
+  jpa:
+    hibernate:
+     ddl-auto: update           
            
            
            
