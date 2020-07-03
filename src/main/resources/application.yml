@@ -1,6 +1,11 @@
 server:
- port: 8080  
-
+ port: 4711  
+ ssl:
+   key-store-password: tomcat1
+   key-store: classpath:mykeystore.p12
+   key-store-type: PKCS12
+   key-alias: tomcat1
+   
 
 
 
@@ -17,8 +22,9 @@ spring:
           google:
             client-id: 489630767816-8iii3jveubnmqmevetail6u72suic0io.apps.googleusercontent.com
             client-secret: sA4TIrc1Llwum7YsbYR2yrJ2
-            
-            
+            scope:
+               - email
+               - profile
             
             
           facebook: 
@@ -26,12 +32,8 @@ spring:
             clientSecret: 65b803ffe88da1bfc17a37d3c6274349
             scope:
                - email
-               - public_profile 
-            
-    
-  
-  
-  
+               - public_profile
+     
   
   
            
