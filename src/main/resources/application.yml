@@ -33,14 +33,53 @@ spring:
             scope:
                - email
                - public_profile
-     
-  
+          
+#          linkedin: 
+#            clientId: 77krnrtolqbyzb
+#            clientSecret: tKrrVQCnVvSZe9yi
+          
   
            
   jpa:
     hibernate:
      ddl-auto: update           
            
-           
-           
-      
+tockenSecret: jdhfknksdd34sw           
+
+
+
+
+# Starts from hier all the swagger comments           
+userController:
+  swagger-ui:
+    auth-description: Bearer JWT Token
+
+  createUser:
+    notes: for creating  a user use URL Path  
+
+#spring.messages.basename=messages,messages_en
+
+http:
+  resp:
+    account:
+      created:
+        success: Account created Successfully
+        failure: Account does not created
+        
+  message:
+    login:
+      success: Authenticated successfully
+      true: true
+      false: false
+      failure: Authentication failed
+    
+    account:
+      updated:
+        success: Account updated successfully
+        failure: Account Nr does not found
+
+  response:
+    200: 200
+    201: 201
+    202: 202
+    500: 500      

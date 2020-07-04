@@ -19,7 +19,7 @@ import com.gts.users.entities.UserEntity;
 import com.gts.users.repositories.UserRepository;
 
 @Component("oauth2authSuccessHandler")
-public class Oauth2GoogleAuthenticationSuccessHandler  implements AuthenticationSuccessHandler{
+public class Oauth2AuthenticationSuccessHandler  implements AuthenticationSuccessHandler{
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();;
 	
