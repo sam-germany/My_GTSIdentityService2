@@ -65,7 +65,12 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 				
    			    UserPrincipal userPrincipal = new UserPrincipal(userEntity);
 
-				return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
+   			 UsernamePasswordAuthenticationToken token2  = new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
+   			 
+   			 System.out.println(token2);    
+   			   return token2; 
+   			    
+		//		return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
 				
 			}                                
 			                                  
