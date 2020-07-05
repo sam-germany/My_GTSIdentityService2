@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gst.users</groupId>
-	<artifactId>app_02</artifactId>
+	<artifactId>GTSChakuriIdentityService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>app_02</name>
+	<packaging>jar</packaging>
+	<name>GTS Identity Service</name>
 	<description>Users Module</description>
 
 	<properties>

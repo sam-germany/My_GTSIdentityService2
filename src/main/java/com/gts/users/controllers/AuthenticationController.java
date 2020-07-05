@@ -1,11 +1,9 @@
 package com.gts.users.controllers;
 
-
-
-
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 //@RestController
+@CrossOrigin(origins = "*")
 public class AuthenticationController {
 	
 /*
