@@ -77,16 +77,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                       		}
                                                       	 }
 
-
-
 	@Override
 	protected void successfulAuthentication(HttpServletRequest httpReq,
 			                               HttpServletResponse httpRes,
 			                                FilterChain chain, 
 			                                Authentication authResult) throws IOException, ServletException {
-		
-		
-		
 		
 		String userName = ((UserPrincipal) authResult.getPrincipal())
 				                                            .getUsername();
@@ -111,9 +106,5 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		
 		   userEntity.setGts_user_login_tries(0);
 		   userRepo.save(userEntity);
-		
-		
-		
-		
 	}
 }
