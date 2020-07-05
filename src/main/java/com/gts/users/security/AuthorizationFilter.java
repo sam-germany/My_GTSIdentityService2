@@ -39,14 +39,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			return;
 		}
 
-		UsernamePasswordAuthenticationToken authentication = getAuthentication22(httpReq);
+		UsernamePasswordAuthenticationToken authentication = getAuthToken(httpReq);
 		SecurityContextHolder.getContext().setAuthentication(authentication);    // SecurityContextHolder is a object which will
 		chain.doFilter(httpReq, httpRes);                                        // be shared in whole project.
 
 	}
 
 	
-	private UsernamePasswordAuthenticationToken getAuthentication22(HttpServletRequest request) {
+	private UsernamePasswordAuthenticationToken getAuthToken(HttpServletRequest request) {
 
 		String token = request.getHeader(SecurityConstants.HEADER_STRING);
 
