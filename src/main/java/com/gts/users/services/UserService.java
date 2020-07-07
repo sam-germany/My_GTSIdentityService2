@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService {
 
 	
     UserDto createUser(UserDto userDto);
+    
+    UserDto createUser22(UserDto userDto);
 	
     UserDto getUserByid(long gts_user_id);
  

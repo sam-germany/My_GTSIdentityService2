@@ -18,6 +18,7 @@ public class UserDto implements Serializable{
     private boolean gts_is_mobile_validated;
     
     
+    
 	public long getGts_user_id() {
 		return gts_user_id;
 	}

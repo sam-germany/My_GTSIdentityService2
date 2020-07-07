@@ -81,7 +81,24 @@ public class UserServiceImpl implements UserService {
 	return returnValue;
 	}
 
- 
+	@Override
+	public UserDto createUser22(UserDto userDto) {
+
+		if(userRepo.findByEmail(userDto.getGts_user_email())  != null)   return null;
+	
+		 ModelMapper modelMapper = new ModelMapper();
+		 UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+       	  
+      	    userEntity.setGts_user_password(bCryptPasswordEncoder.encode(userDto.getGts_user_password()));
+
+
+  	     	UserEntity  storedUserDetails = userRepo.save(userEntity);
+
+    		UserDto  returnValue = modelMapper.map(storedUserDetails, UserDto.class);
+
+	return returnValue;
+	}
+	
 	   @Override
 	    public UserDto getUserByid(long gts_user_id) {
              UserDto returnValue = new UserDto();

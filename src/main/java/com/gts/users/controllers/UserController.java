@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gts.users.model.request.UserDetailsRequestModel;
 import com.gts.users.model.response.JsonResponseModel;
+import com.gts.users.model.response.RoleRest;
 import com.gts.users.model.response.UserRest;
 import com.gts.users.repositories.ResponseMessageConstants;
+import com.gts.users.services.RoleService;
 import com.gts.users.services.UserService;
+import com.gts.users.shared.dto.RoleDto;
 import com.gts.users.shared.dto.UserDto;
 
 
@@ -32,9 +36,10 @@ public class UserController {
 
 
 	  @Autowired
-	  private UserService uService;
+	  private UserService userService;
 	  
-	  
+	  @Autowired
+	  private RoleService roleService;
 	  
 	   @PostMapping( produces = { MediaType.APPLICATION_JSON_VALUE })
        public JsonResponseModel  createUser(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
@@ -44,7 +49,7 @@ public class UserController {
 		     ModelMapper modelMapper = new ModelMapper();
 	     	 UserDto userDto = modelMapper.map(userDetails, UserDto.class);
 	     	
-		      userDto =  uService.createUser(userDto);
+		      userDto =  userService.createUser(userDto);
 		     
 		       if(userDto == null) {
 				    returnValue.setSuccess(ResponseMessageConstants.getSuccessFalse());
@@ -59,7 +64,29 @@ public class UserController {
 		    return returnValue;
 	    }
 	   
-
+	   @PostMapping( path= "/create22" , produces = { MediaType.APPLICATION_JSON_VALUE })
+       public JsonResponseModel  createUser22(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
+		  
+		     JsonResponseModel returnValue = new JsonResponseModel();
+		
+		     
+		     ModelMapper modelMapper = new ModelMapper();
+	     	 UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+	     	
+		      userDto =  userService.createUser22(userDto);
+		     
+		       if(userDto == null) {
+				    returnValue.setSuccess(ResponseMessageConstants.getSuccessFalse());
+				    returnValue.setMessage(ResponseMessageConstants.getAccountCreatedFailure());
+				    returnValue.setStatus_code(ResponseMessageConstants.getResponse500());
+		       }else {
+				   returnValue.setSuccess(ResponseMessageConstants.getSuccessTrue());
+				   returnValue.setMessage(ResponseMessageConstants.getAccountCreatedSuccess());
+				   returnValue.setStatus_code(ResponseMessageConstants.getResponse200()); 
+		       }
+		       
+		    return returnValue;
+	    }
 
 
 	
@@ -70,7 +97,7 @@ public class UserController {
 		   JsonResponseModel returnValue2 = new JsonResponseModel();
 		   ModelMapper modelMapper = new ModelMapper();
 		   
-		   UserDto userDto = uService.getUserByid(id);
+		   UserDto userDto = userService.getUserByid(id);
 		   
 		   if(userDto == null) {
 			    returnValue2.setSuccess(ResponseMessageConstants.getSuccessFalse());
@@ -96,7 +123,7 @@ public class UserController {
 		   ModelMapper modelMapper = new ModelMapper();
 	       UserDto userDto = modelMapper.map(userDetails, UserDto.class);
 		   
-		     userDto =  uService.updateUser(id, userDto);
+		     userDto =  userService.updateUser(id, userDto);
 
 		   if(userDto == null) {
 			    returnValue.setSuccess(ResponseMessageConstants.getSuccessFalse());
@@ -117,7 +144,7 @@ public class UserController {
 		   
 		   JsonResponseModel returnValue = new JsonResponseModel();
 		   
-		   UserDto userDto =  uService.deleteUser(id);
+		   UserDto userDto =  userService.deleteUser(id);
 		   
 		   if(userDto == null) {
 			    returnValue.setSuccess(ResponseMessageConstants.getSuccessFalse());
@@ -142,7 +169,7 @@ public class UserController {
 		   JsonResponseModel returnValue2 = new JsonResponseModel();
 		   ModelMapper modelMapper = new ModelMapper();
 		   
-		   List<UserDto> allUsers = uService.getAllUsers(page, limit);
+		   List<UserDto> allUsers = userService.getAllUsers(page, limit);
 		   
 		   if(allUsers == null) {
 			    returnValue2.setSuccess(ResponseMessageConstants.getSuccessFalse());
@@ -157,7 +184,23 @@ public class UserController {
 		   }
 		   
 		   return (T) returnValue;
-		   
-		   
 	   }
+	   
+	   @GetMapping(path="/getRolesById/{id}")
+	   public List<RoleRest> getAllRolesByUserId(@PathVariable long id) {
+		  
+		   List<RoleRest> returnValue = new ArrayList<>();
+		   ModelMapper modelMapper = new ModelMapper();
+		   
+		      List<RoleDto> roles  =  roleService.getAllRolesUserId(id);
+		  
+		      
+		      for(RoleDto userDto : roles ) {
+				   returnValue.add(modelMapper.map(userDto, RoleRest.class));
+			   }
+
+		      return returnValue;
+	   }
+	   
+	   
 }
