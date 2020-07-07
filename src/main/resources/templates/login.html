@@ -23,8 +23,8 @@
             <p th:if="${verified}" class="info">Your account has been verified!, Please sign-in</p>
             <div class="account-wall">
                 <form class="form-signin" th:action="@{/login}" method="post">
-                <input type="text" name = "username" class="form-control" placeholder="Username" required autofocus>
-                <input type="password" name = "password" class="form-control" placeholder="Password" required>
+                <input type="text" name = "gts_user_email" class="form-control" placeholder="Username" required autofocus>
+                <input type="password" name = "gts_user_password" class="form-control" placeholder="Password" required>
                 <!-- <input type="password" name = "securityPin" class="form-control" placeholder="Security pin" required> -->
                <label class="checkbox pull-left">
                     <input type="checkbox" name="remember-me" />

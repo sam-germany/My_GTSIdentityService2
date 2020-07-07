@@ -57,6 +57,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)// if required then we can change the
 	                                                                     // policy from STATELESS to any other also
 	                 .and().oauth2Login().loginPage("/login").successHandler(oauth2authSuccessHandler);
+	             
+	             	http.cors();
+
 	              }
 	   
 	   
