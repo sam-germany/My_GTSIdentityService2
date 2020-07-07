@@ -125,6 +125,8 @@ public class UserServiceImpl implements UserService {
 	    	
 	    	userEntity.setGts_user_first_name(userDto.getGts_user_first_name());
 	    	userEntity.setGts_user_password(bCryptPasswordEncoder.encode(userDto.getGts_user_password()));
+	    	userEntity.setGts_user_last_name(userDto.getGts_user_last_name());
+	    	userEntity.setGts_user_mobile(userDto.getGts_user_mobile());
 	    	
 	    	UserEntity updatedUser = userRepo.save(userEntity);
 	    	

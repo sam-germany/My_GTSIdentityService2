@@ -187,19 +187,30 @@ public class UserController {
 	   }
 	   
 	   @GetMapping(path="/getRolesById/{id}")
-	   public List<RoleRest> getAllRolesByUserId(@PathVariable long id) {
+	   public <T> T getAllRolesByUserId(@PathVariable long id) {
 		  
 		   List<RoleRest> returnValue = new ArrayList<>();
+		   JsonResponseModel returnValue2 = new JsonResponseModel();
 		   ModelMapper modelMapper = new ModelMapper();
 		   
 		      List<RoleDto> roles  =  roleService.getAllRolesUserId(id);
 		  
+		      if(roles != null) {
+		 
+		       roles.forEach((roleDto) -> {
+		        	                   returnValue.add(modelMapper.map(roleDto, RoleRest.class));
+		              });
+		         
+		    	  
+		    return (T) returnValue;
 		      
-		      for(RoleDto userDto : roles ) {
-				   returnValue.add(modelMapper.map(userDto, RoleRest.class));
-			   }
-
-		      return returnValue;
+		      }else {
+		            returnValue2.setSuccess(ResponseMessageConstants.getSuccessFalse());
+				    returnValue2.setMessage("No role is defined to this user");
+				    returnValue2.setStatus_code(ResponseMessageConstants.getResponse500());
+				   
+		   return (T) returnValue2;
+		      }
 	   }
 	   
 	   

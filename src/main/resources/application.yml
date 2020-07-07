@@ -73,6 +73,10 @@ http:
       false: false
       failure: Authentication failed
     
+    success:
+      responsetrue: true
+      responsefalse: false
+    
     account:
       updated:
         success: Account updated successfully

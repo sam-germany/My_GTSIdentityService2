@@ -44,8 +44,9 @@ public class RoleEntity implements Serializable{
 	public RoleEntity() { }
 	
 	
-	public RoleEntity(String name) {
+	public RoleEntity(String name, boolean status) {
 		this.gts_role_name = name;
+		this.gts_role_status= status;
 	}
 
 	public Collection<UserEntity> getUsers() {

@@ -53,8 +53,8 @@ public class InitialUsersSetup {
     	PermissionEntity get_all_users = createPermission("CAN_GET_LIST_OF_USERS");
     	PermissionEntity can_delete_account = createPermission("CAN_DELETE_ACCOUNT");
     	
-    	RoleEntity roleUser  = createRole("ROLE_USER", Arrays.asList(create_account , update_account));
-    	RoleEntity roleAdmin = createRole("ROLE_ADMIN", Arrays.asList(create_account, update_account,
+    	RoleEntity roleUser  = createRole("ROLE_USER",true, Arrays.asList(create_account , update_account));
+    	RoleEntity roleAdmin = createRole("ROLE_ADMIN",true, Arrays.asList(create_account, update_account,
     	                                              	    	  can_get_one_user,  get_all_users,can_delete_account));
     	
     	
@@ -105,11 +105,11 @@ public class InitialUsersSetup {
              }
     
     @Transactional
-    private RoleEntity  createRole(String name, Collection<PermissionEntity> permissions) {
+    private RoleEntity  createRole(String name,boolean status, Collection<PermissionEntity> permissions) {
     	
     	  RoleEntity role = roleRepo.findByName(name);
     	  if(role == null) {
-    		  role = new RoleEntity(name);
+    		  role = new RoleEntity(name, status);
     		  role.setPermissions(permissions);
     		  roleRepo.save(role);
     	  }
