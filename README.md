@@ -25,3 +25,38 @@
 - Authorities - [ROLE_USER, SCOPE_https://www.googleapis.com/auth/userinfo.email, 
                       SCOPE_https://www.googleapis.com/auth/userinfo.profile, SCOPE_openid]
 - CLASS       - class org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
+
+======================================================================
+
+• To retrive all the Roles and Permissions of a specific user 
+• GET:   https://localhost:4711/users/getRolesById/1
+
+  Resonse
+  --------
+
+[
+    {
+        "gts_role_id": 1,
+        "gts_role_name": "ROLE_USER",
+        "permissions": [
+            {
+                "gts_permission_id": 1,
+                "gts_permission_name": "CAN_CREATE_ACCOUNT",
+                "gts_permission_status": false,
+                "gts_permission_description": null
+            },
+            {
+                "gts_permission_id": 2,
+                "gts_permission_name": "CAN_UPDATE_ACCCOUNT",
+                "gts_permission_status": false,
+                "gts_permission_description": null
+            }
+        ]
+    }
+]
+
+
+
+
+
+
