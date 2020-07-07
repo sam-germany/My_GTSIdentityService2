@@ -33,10 +33,11 @@ public class RoleServiceImpl implements RoleService {
 		  ModelMapper modelMapper  = new ModelMapper();
 		  
 		  UserEntity  userEntity  =  userRepo.findByUserId(gts_user_id);
+		  if(userEntity == null) return null;
 		  
 		  Collection<RoleEntity> roles1 =	userEntity.getRoles();
 		  
-		  if(userEntity == null) return returnValue;
+		  if(roles1 == null) return null;
 		 
 		
 	      roles1.forEach((role2) ->{

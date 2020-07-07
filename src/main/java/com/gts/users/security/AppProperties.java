@@ -31,13 +31,6 @@ public class AppProperties {
 		return env.getProperty("http.resp.account.created.failure");
 	}
 	
-	public String getSuccessTrue() {
-		return env.getProperty("http.message.success.true");
-	}
-	
-	public String getSuccessFalse() {
-		return env.getProperty("http.message.success.false");
-	}
 	
 	public String getAcoountUpdationSuccess() {
 		return env.getProperty("http.message.account.updated.success");
@@ -46,7 +39,13 @@ public class AppProperties {
 		return env.getProperty("http.message.account.updated.failure");
 	}
 	
+	public String getSuccessTrue() {
+		return env.getProperty("http.message.success.responsetrue");
+	}
 	
+	public String getSuccessFalse() {
+		return env.getProperty("http.message.success.responsefalse");
+	}
 	
 	
 	
